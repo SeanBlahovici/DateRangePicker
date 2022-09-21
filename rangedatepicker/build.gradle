@@ -1,24 +1,19 @@
 apply plugin: 'com.android.library'
 
-ext {
-    PUBLISH_GROUP_ID = 'com.savvi.datepicker'
-    PUBLISH_ARTIFACT_ID = 'rangepicker'
-    PUBLISH_VERSION = '1.0.1'
-}
-
 android {
-    compileSdkVersion 32
-    buildToolsVersion "30.0.3"
+    def config = rootProject.extensions.getByName("ext")
 
+    compileSdkVersion config["compile_sdk"]
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 32
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion config["min_sdk"]
+        targetSdkVersion config["target_sdk"]
+        versionCode config["version_code"]
+        versionName config["version_name"]
+        testInstrumentationRunner config["test_runner"]
 
         vectorDrawables.useSupportLibrary = true
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -28,7 +23,6 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.4.2'
-    implementation "androidx.recyclerview:recyclerview:1.2.1"
+    implementation Deps.appCompat
+    implementation Deps.recyclerView
 }
