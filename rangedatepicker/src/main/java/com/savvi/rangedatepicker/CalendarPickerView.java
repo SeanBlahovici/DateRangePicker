@@ -1,5 +1,15 @@
 package com.savvi.rangedatepicker;
 
+import static java.util.Calendar.DATE;
+import static java.util.Calendar.DAY_OF_MONTH;
+import static java.util.Calendar.DAY_OF_WEEK;
+import static java.util.Calendar.HOUR_OF_DAY;
+import static java.util.Calendar.MILLISECOND;
+import static java.util.Calendar.MINUTE;
+import static java.util.Calendar.MONTH;
+import static java.util.Calendar.SECOND;
+import static java.util.Calendar.YEAR;
+
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -29,16 +39,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
-
-import static java.util.Calendar.DATE;
-import static java.util.Calendar.DAY_OF_MONTH;
-import static java.util.Calendar.DAY_OF_WEEK;
-import static java.util.Calendar.HOUR_OF_DAY;
-import static java.util.Calendar.MILLISECOND;
-import static java.util.Calendar.MINUTE;
-import static java.util.Calendar.MONTH;
-import static java.util.Calendar.SECOND;
-import static java.util.Calendar.YEAR;
 
 
 public class CalendarPickerView extends RecyclerView {
@@ -246,7 +246,6 @@ public class CalendarPickerView extends RecyclerView {
                     new MonthDescriptor(monthCounter.get(MONTH), monthCounter.get(YEAR), date,
                             monthNameFormat.format(date));
             cells.put(monthKey(month), getMonthCells(month, monthCounter));
-            Logr.d("Adding month %s", month);
             months.add(month);
             monthCounter.add(MONTH, 1);
         }
@@ -366,8 +365,6 @@ public class CalendarPickerView extends RecyclerView {
         post(new Runnable() {
             @Override
             public void run() {
-                Logr.d("Scrolling to position %d", selectedIndex);
-
                 if (smoothScroll) {
                     smoothScrollToPosition(selectedIndex);
                 } else {
@@ -428,7 +425,6 @@ public class CalendarPickerView extends RecyclerView {
      * {@link android.app.DialogFragment#onStart()}).
      */
     public void fixDialogDimens() {
-        Logr.d("Fixing dimensions to h = %d / w = %d", getMeasuredHeight(), getMeasuredWidth());
         // Fix the layout height/width after the dialog has been shown.
         getLayoutParams().height = getMeasuredHeight();
         getLayoutParams().width = getMeasuredWidth();
@@ -436,7 +432,6 @@ public class CalendarPickerView extends RecyclerView {
         post(new Runnable() {
             @Override
             public void run() {
-                Logr.d("Dimens are fixed: now scroll to the selected date");
                 scrollToSelectedDates();
             }
         });
@@ -471,7 +466,6 @@ public class CalendarPickerView extends RecyclerView {
      * be called when the screen has been rotated and the dialog should be re-measured.
      */
     public void unfixDialogDimens() {
-        Logr.d("Reset the fixed dimensions to allow for re-measurement");
         // Fix the layout height/width after the dialog has been shown.
         getLayoutParams().height = LayoutParams.MATCH_PARENT;
         getLayoutParams().width = LayoutParams.MATCH_PARENT;
@@ -874,7 +868,6 @@ public class CalendarPickerView extends RecyclerView {
 
         while ((cal.get(MONTH) < month.getMonth() + 1 || cal.get(YEAR) < month.getYear()) //
                 && cal.get(YEAR) <= month.getYear()) {
-            Logr.d("Building week row starting at %s", cal.getTime());
             List<MonthCellDescriptor> weekCells = new ArrayList<>();
             cells.add(weekCells);
             for (int c = 0; c < 7; c++) {

@@ -1,5 +1,9 @@
 package com.savvi.rangedatepicker;
 
+import static android.view.View.MeasureSpec.AT_MOST;
+import static android.view.View.MeasureSpec.EXACTLY;
+import static android.view.View.MeasureSpec.makeMeasureSpec;
+
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Canvas;
@@ -8,10 +12,6 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
-
-import static android.view.View.MeasureSpec.AT_MOST;
-import static android.view.View.MeasureSpec.EXACTLY;
-import static android.view.View.MeasureSpec.makeMeasureSpec;
 
 /**
  * ViewGroup that draws a grid of calendar cells.  All children must be {@link CalendarRowView}s.
@@ -102,11 +102,8 @@ public class CalendarGridView extends ViewGroup {
   }
 
   @Override protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-    Logr.d("Grid.onMeasure w=%s h=%s", MeasureSpec.toString(widthMeasureSpec),
-        MeasureSpec.toString(heightMeasureSpec));
     int widthMeasureSize = MeasureSpec.getSize(widthMeasureSpec);
     if (oldWidthMeasureSize == widthMeasureSize) {
-      Logr.d("SKIP Grid.onMeasure");
       setMeasuredDimension(getMeasuredWidth(), getMeasuredHeight());
       return;
     }
@@ -131,7 +128,6 @@ public class CalendarGridView extends ViewGroup {
     }
     final int measuredWidth = widthMeasureSize + 2; // Fudge factor to make the borders show up.
     setMeasuredDimension(measuredWidth, totalHeight);
-    Logr.d("Grid.onMeasure %d ms", System.currentTimeMillis() - start);
   }
 
   @Override protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
@@ -143,7 +139,6 @@ public class CalendarGridView extends ViewGroup {
       child.layout(left, top, right, top + rowHeight);
       top += rowHeight;
     }
-    Logr.d("Grid.onLayout %d ms", System.currentTimeMillis() - start);
   }
 
   public void setNumRows(int numRows) {

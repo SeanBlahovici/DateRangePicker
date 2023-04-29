@@ -1,5 +1,9 @@
 package com.savvi.rangedatepicker;
 
+import static android.view.View.MeasureSpec.AT_MOST;
+import static android.view.View.MeasureSpec.EXACTLY;
+import static android.view.View.MeasureSpec.makeMeasureSpec;
+
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Typeface;
@@ -7,10 +11,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import static android.view.View.MeasureSpec.AT_MOST;
-import static android.view.View.MeasureSpec.EXACTLY;
-import static android.view.View.MeasureSpec.makeMeasureSpec;
 
 /** TableRow that draws a divider between each cell. To be used with {@link CalendarGridView}. */
 public class CalendarRowView extends ViewGroup implements View.OnClickListener {
@@ -47,7 +47,6 @@ public class CalendarRowView extends ViewGroup implements View.OnClickListener {
     final int widthWithPadding = totalWidth + getPaddingLeft() + getPaddingRight();
     final int heightWithPadding = rowHeight + getPaddingTop() + getPaddingBottom();
     setMeasuredDimension(widthWithPadding, heightWithPadding);
-    Logr.d("Row.onMeasure %d ms", System.currentTimeMillis() - start);
   }
 
   @Override protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
@@ -60,7 +59,6 @@ public class CalendarRowView extends ViewGroup implements View.OnClickListener {
       int r = ((c + 1) * width) / 7;
       child.layout(l, 0, r, cellHeight);
     }
-    Logr.d("Row.onLayout %d ms", System.currentTimeMillis() - start);
   }
 
   public void setIsHeaderRow(boolean isHeaderRow) {

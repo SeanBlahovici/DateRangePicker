@@ -108,7 +108,6 @@ public class MonthView extends LinearLayout {
                      boolean displayOnly, Typeface titleTypeface, Typeface dateTypeface, ArrayList<Integer> deactivatedDates, @Nullable ArrayList<SubTitle> subTitles) {
 
 
-        Logr.d("Initializing MonthView (%d) for %s", System.identityHashCode(this), month);
         long start = System.currentTimeMillis();
         title.setText(month.getLabel());
         NumberFormat numberFormatter = NumberFormat.getInstance(locale);
@@ -187,8 +186,6 @@ public class MonthView extends LinearLayout {
         if (dateTypeface != null) {
             grid.setTypeface(dateTypeface);
         }
-
-        Logr.d("MonthView.init took %d ms", System.currentTimeMillis() - start);
     }
 
     public void setDividerColor(int color) {
